@@ -131,7 +131,7 @@ export default function Footer() {
             </a>
             <span className="text-white/40">•</span>
             <a
-              href="https://linkedin.com/in/gurjyot-singh-gill"
+              href="https://www.linkedin.com/in/gurjyot-gill-71807b215/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-white/85 hover:text-white flex items-center gap-1 transition-colors"

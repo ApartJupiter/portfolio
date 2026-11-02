@@ -62,7 +62,7 @@ export default function Hero() {
             GitHub <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
           <a
-            href="https://linkedin.com/in/gurjyot-singh-gill"
+            href="https://www.linkedin.com/in/gurjyot-gill-71807b215/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-sm text-white/85 underline decoration-white/30 underline-offset-4 hover:decoration-white"
