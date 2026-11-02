@@ -54,7 +54,7 @@ export default function Hero() {
             <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
           </a>
           <a
-            href="https://github.com/gurjyot-singh-gill"
+            href="https://github.com/ApartJupiter"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-sm text-white/85 underline decoration-white/30 underline-offset-4 hover:decoration-white"

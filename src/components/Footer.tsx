@@ -122,7 +122,7 @@ export default function Footer() {
 
           <div className="pt-2 flex items-center gap-3">
             <a
-              href="https://github.com/gurjyot-singh-gill"
+              href="https://github.com/ApartJupiter"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-white/85 hover:text-white flex items-center gap-1 transition-colors"
