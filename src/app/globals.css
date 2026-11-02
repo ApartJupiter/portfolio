@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Palette: Seal Blue #DBF2FC + Navy #072D59 + Crimson Pink #FC6B80.
+   Colours are RGB triplets so Tailwind opacity modifiers keep working.
+   `.theme-dark` is toggled by FlutedGlass once the orb pops. */
+:root {
+  --ink: 7 45 89;
+  --panel: 219 242 252;
+  --sky-ink: 29 79 138;
+  --accent-text: 201 47 79;
+  --background: #dbf2fc;
+}
+.theme-dark {
+  --ink: 219 242 252;
+  --panel: 12 40 82;
+  --sky-ink: 159 211 240;
+  --accent-text: 252 107 128;
+  --background: #041733;
+}
+
+body {
+  color: rgb(var(--ink));
+  background-color: var(--background);
+  background-image: linear-gradient(180deg, #e6f6fd 0%, #dbf2fc 50%, #cbe8f7 100%);
+  background-attachment: fixed;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+}
+
+/* Smooth colour hand-over while the theme flips */
+.theme-switching,
+.theme-switching * {
+  transition:
+    color 0.9s ease,
+    background-color 0.9s ease,
+    border-color 0.9s ease,
+    fill 0.9s ease,
+    stroke 0.9s ease !important;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #cbe8f7;
+}
+.theme-dark ::-webkit-scrollbar-track {
+  background: #041733;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--ink) / 0.35);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--ink) / 0.55);
+}
+
+/* Glow effects */
+.glow-cyan,
+.glow-purple,
+.glow-emerald {
+  box-shadow: 0 0 40px -10px rgb(var(--ink) / 0.2);
+}
+
+/* Orb + partial reeded glass backdrop */
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+}
+.orb-core {
+  width: min(44vw, 620px);
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle at 78% 22%, #fc6b80 0%, rgba(252, 107, 128, 0) 42%),
+    radial-gradient(circle at 30% 70%, #1a5fb0 0%, rgba(26, 95, 176, 0) 55%),
+    radial-gradient(circle at 50% 50%, #072d59 0%, #0a3d7a 62%, rgba(10, 61, 122, 0.6) 100%);
+  filter: blur(6px);
+  animation: orb-float 18s ease-in-out infinite alternate;
+}
+.orb-glow {
+  width: min(40vw, 560px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(252, 107, 128, 0.55) 0%, rgba(252, 107, 128, 0) 70%);
+  filter: blur(50px);
+  animation: orb-float-2 22s ease-in-out infinite alternate;
+}
+
+/* The glass only covers a vertical band, not the whole page.
+   It is built from separate strips so each one can react to the cursor. */
+.reeded-band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 14vw;
+  width: 30vw;
+  min-width: 260px;
+  display: flex;
+}
+.reed {
+  --blur: 18px;
+  flex: 1 1 0;
+  position: relative;
+  backdrop-filter: blur(var(--blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(1.2);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(7, 45, 89, 0.16) 92%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  will-change: transform, backdrop-filter;
+}
+
+@keyframes orb-float {
+  from { transform: translate(-6vw, -3vh) scale(1); }
+  to   { transform: translate(6vw, 6vh) scale(1.08); }
+}
+@keyframes orb-float-2 {
+  from { transform: translate(4vw, 6vh) scale(1.05); }
+  to   { transform: translate(-8vw, -4vh) scale(0.95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-core,
+  .orb-glow { animation: none; }
+}
+
+/* Dark theme: ambient blobs that live behind the glass band */
+.orb-ambient-pink {
+  width: min(36vw, 520px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(252, 107, 128, 0.5) 0%, rgba(252, 107, 128, 0) 70%);
+  filter: blur(60px);
+  animation: orb-float-2 20s ease-in-out infinite alternate;
+}
+.orb-ambient-blue {
+  width: min(48vw, 700px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(26, 95, 176, 0.55) 0%, rgba(26, 95, 176, 0) 70%);
+  filter: blur(70px);
+  animation: orb-float 26s ease-in-out infinite alternate;
+}
+
+/* Glass band tuned for the dark theme */
+.theme-dark .reed {
+  background: linear-gradient(
+    90deg,
+    rgba(219, 242, 252, 0.16) 0%,
+    rgba(219, 242, 252, 0.03) 40%,
+    rgba(0, 8, 24, 0.35) 92%,
+    rgba(219, 242, 252, 0.16) 100%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .orb-ambient-pink,
+  .orb-ambient-blue { animation: none; }
+}
